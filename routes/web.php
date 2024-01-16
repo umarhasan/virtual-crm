@@ -43,12 +43,11 @@ Route::get('/', function () {
   return view('auth.login');
 });
 
-
+// Change file
 Route::get('/google-calendar/connect', [GoogleCalendarController::class,'connect']);
 Route::get('/signup', [RegisterController::class, 'register_form'])->name('signup');
 Route::get('logout', [LoginController::class, 'logout']);
 Route::get('account/verify/{token}', [LoginController::class, 'verifyAccount'])->name('user.verify'); 
-
 // Route::get('/', [HomeController::class,'index']);
 Route::get('/detail/{id}', [HomeController::class,'product_detail'])->name('product.detail');
 
