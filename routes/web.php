@@ -45,7 +45,6 @@ Route::get('/', function () {
 
 
 Route::get('/google-calendar/connect', [GoogleCalendarController::class,'connect']);
-
 Route::get('/signup', [RegisterController::class, 'register_form'])->name('signup');
 Route::get('logout', [LoginController::class, 'logout']);
 Route::get('account/verify/{token}', [LoginController::class, 'verifyAccount'])->name('user.verify'); 
