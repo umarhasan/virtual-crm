@@ -1,0 +1,82 @@
+@extends('layouts.app')
+
+
+@section('content')
+
+<div class="main-panel">
+  <div class="content-wrapper">
+    <div class="row">
+      <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+          <div class="container-fluid">
+            <div class="row mb-2">
+              <div class="col-sm-6">
+                <h1>Leads Pick</h1>
+              </div>
+              <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                  <li class="breadcrumb-item"><a href="#">Home</a></li>
+                  <li class="breadcrumb-item active">Leads Pick</li>
+                </ol>
+              </div>
+            </div>
+          </div><!-- /.container-fluid -->
+        </section>
+        <section class="content">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-12">
+                <div class="card">
+                  <div class="card-header">
+                    <h3 class="card-title">Leads Pick List</h3>
+                  </div>
+                  <!-- /.card-header -->
+                  <div class="card-body">
+                    <table id="order-listing" class="table dataTable no-footer" role="grid" aria-describedby="order-listing_info">
+                    <thead>
+                        <tr>
+                          <th>#</th>
+                          <th>users</th>
+                          <th>Leads</th>
+                          <th>Phone</th>
+                          <th>Comments</th>
+                          <th>Status</th>
+                          <th>Action</th>
+                        </tr>
+                        </thead>
+                      <tbody>
+                        @if($lead_accepted)
+                            @php $i=0; @endphp
+                            @foreach($lead_accepted as $lead)
+                                @php $i++; @endphp    
+                                <tr>
+                                    <td>{{ $i }}</td>
+                                    <td>{{ $lead->users->name }}</td>
+                                    <td>{{ $lead->leads->name }}</td>
+                                    <td>{{ $lead->leads->phone }}</td>
+                                    <td>{{ $lead->comment }}</td>
+                                    <td>{{ $lead->status }}</td>
+                                    <td>
+                                    <a href="{{ route('leads.invoice.show',$lead->lead_id) }}" class="btn btn-warning btn-sm">View</a>    
+                                   
+                                    </td>
+                                </tr>
+                            @endforeach
+                        @endif  
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+    </div>
+  </div>
+</div>
+
+
+ 
+@endsection
+ 
