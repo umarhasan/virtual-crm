@@ -46,30 +46,27 @@
                         </tr>
                       </thead>
                       <tbody>
-                        @php $i=0; @endphp
-                          @foreach($lead_pick as $lead)
-                          @php $i++; @endphp    
-                              <tr>
-                                  <td>{{ $i }}</td>
-                                  <td>{{ $lead->users->name }}</td>
-                                  <td>{{ $lead->leads->name }}</td>
-                                  <td>{{ $lead->leads->phone }}</td>
+                              @php $i=0; @endphp
+                              @foreach($lead_pick as $lead)
+                                @php $i++; @endphp
+                                <tr>
+                                    <td>{{ $i }}</td>
+                                    <td>{{ $lead->users->name }}</td>
+                                    <td>{{ $lead->leads->name }}</td>
+                                    <td>{{ $lead->leads->phone }}</td>
                                   @if(isset($lead) && $lead->status == 'pending')
-                                  <td>{!! $lead->comment !!}</td>
+                                    <td>{!! $lead->comment !!}</td>
                                     <td><span class="btn btn-warning btn-sm">{{ $lead->status }}</span></td>
                                   @elseif($lead->status == 'rejected')
                                     <td>{!! $lead->comment !!}</td>
                                     <td><span class="btn btn-danger btn-sm">{{ $lead->status }}</span></td>
-                                  
-                                    @else
+                                  @else
                                     <td>{!! $lead->comment !!}</td>
                                     <td><span class="btn btn-primary btn-sm">{{ $lead->status }}</span></td>
                                   @endif
-                                    <td>
-                                      <a class="btn btn-primary btn-sm" data-toggle="modal" data-target="#leadModal" data-lead-id="{{ $lead->leads->id }}" data-name="{{ $lead->leads->name }}" data-phone="{{ $lead->leads->phone }}">Leads Mark Convert</a>
-                                    </td>
-                              </tr>
-                          @endforeach
+                                    <td><a class="btn btn-primary btn-sm" data-toggle="modal" data-target="#leadModal" data-lead-id="{{ $lead->leads->id }}" data-name="{{ $lead->leads->name }}" data-phone="{{ $lead->leads->phone }}">Leads Mark Convert</a></td>
+                                </tr>
+                              @endforeach
                       </tbody>
                     </table>
                   </div>
@@ -143,15 +140,12 @@
       var leadId = $(this).data('lead-id');
       var leadName = $(this).data('name');
       var leadPhone = $(this).data('phone');
-     
       // Populate the modal with lead details
       $('#leadName').text(leadName);
       $('#leadPhone').text(leadPhone);
-
       $('#lead_Id').val(leadId);
       $('#lead_Name').val(leadName);
       $('#lead_Phone').val(leadPhone);
-
       // Show the modal
       $('#leadModal').modal('show');
     });
