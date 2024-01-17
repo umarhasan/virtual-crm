@@ -20,4 +20,9 @@ class Leads extends Model
         return $this->hasOne(LeadStatus::class,'id','status');
     }
 
+    public function LeadsUser()
+    {
+        return $this->hasOne(UserLead::class,'lead_id','id');
+    }
+
 }

@@ -58,7 +58,11 @@
                                   <td>{{ $lead->company_name }}</td>
                                   <td>{{ $lead->phone }}</td>
                                   <td>
-                                      <a href="{{ route('leads.accepted',$lead->id) }}" class="btn btn-primary btn-sm">Pick</a>    
+                                     
+                                    @if(isset($lead->LeadsUser) && $lead->LeadsUser->status == 'accepted')
+                                    @else
+                                    <a href="{{ route('leads.accepted', $lead->id) }}" class="btn btn-primary btn-sm">Pick</a>
+                                    @endif
                                       <a href="{{ route('leads.show',$lead->id) }}" class="btn btn-warning btn-sm">View</a>    
                                       @can('leads-edit')
                                       <a href="{{ route('leads.edit', $lead->id) }}" class="btn btn-primary btn-sm">Edit</a>

@@ -14,7 +14,7 @@ class LeadsController extends Controller
 {
     public function index()
     {
-        $leads = Leads::all();
+        $leads = Leads::with('LeadsUser')->get();
         return view('leads.index', compact('leads'));
     }
 
@@ -155,12 +155,15 @@ class LeadsController extends Controller
 
     public function LeadsUserInvoice(){
         $user_id = Auth::id();
-        $lead_accepted = UserLead::with('users','leads')->where('user_id',$user_id)->whereIn('status',['accepted'])->get();
+        if($user_id == 1){
+            $lead_accepted = UserLead::with('users','leads')->whereIn('status',['accepted'])->get();
+        }else{
+            $lead_accepted = UserLead::with('users','leads')->where('user_id',$user_id)->whereIn('status',['accepted'])->get();
+        }
         return view('leads.invoice',compact('lead_accepted'));
     }
 
     public function LeadsInvoiceShow($id){
-        
         $invoice = UserLead::with('users','leads')->where('lead_id',$id)->first();
         return view('leads.invoice_show',compact('invoice'));
     }
