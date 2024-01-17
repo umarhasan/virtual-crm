@@ -147,6 +147,7 @@ class LeadsController extends Controller
         $userLead = UserLead::where('lead_id',$request->lead_id)->first();
         $userLead->status = $request->status;
         $userLead->comment = $request->lead_comment;
+        $userLead->amount = $request->lead_amount;
         $userLead->save();
         
         return redirect()->back();

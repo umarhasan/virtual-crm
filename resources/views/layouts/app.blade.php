@@ -529,6 +529,23 @@
             </div>
           </li>
           @endcan
+          @can('package-list')
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#package-layouts" aria-expanded="false" aria-controls="package-layouts">
+              <i class="fa fa-users menu-icon"></i>
+              <span class="menu-title">Package List</span>
+              <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="package-layouts">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> <a class="nav-link" href="{{route('package.index')}}">List Package</a></li>
+                @can('package-create')
+                <li class="nav-item"> <a class="nav-link" href="{{route('package.create')}}">Add Package</a></li>
+                @endcan
+              </ul>
+            </div>
+          </li>
+          @endcan
           @can('shift-list')
           <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#shift-layouts" aria-expanded="false" aria-controls="shift-layouts">

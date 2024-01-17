@@ -11,8 +11,9 @@ class Attendance extends Model
     protected $table = 'attendance';
     protected $guarded = [];  
 
-    public function users()
-    {
-        return $this->hasOne(\App\Models\User::class,'id','user_id');
-    }
+
+    public function users(){
+        return $this->hasOne(User::class, 'id','user_id');
+     }
+
 }
