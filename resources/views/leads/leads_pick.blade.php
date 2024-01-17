@@ -40,6 +40,8 @@
                           <th>users</th>
                           <th>Leads</th>
                           <th>Phone</th>
+                          <th>Comments</th>
+                          <th>Status</th>
                           <th>Action</th>
                         </tr>
                         </thead>
@@ -52,6 +54,19 @@
                                   <td>{{ $lead->users->name }}</td>
                                   <td>{{ $lead->leads->name }}</td>
                                   <td>{{ $lead->leads->phone }}</td>
+                                  @if(isset($lead) && $lead->status == 'pending')
+                                  <td>{!! $lead->comment !!}</td>
+                                    <td><span class="btn btn-warning btn-sm">{{ $lead->status }}</span></td>
+                                  @elseif($lead->status == 'rejected')
+                                  <td>{!! $lead->comment !!}</td>
+                                    <td><span class="btn btn-danger btn-sm">{{ $lead->status }}</span></td>
+                                  
+                                    @else
+                                    <td>{!! $lead->comment !!}</td>
+                                    <td><span class="btn btn-primary btn-sm">{{ $lead->status }}</span></td>
+                                  
+                                  @endif
+                                
                                   <td>
                                   <a class="btn btn-primary btn-sm" data-toggle="modal" data-target="#leadModal" data-lead-id="{{ $lead->leads->id }}" data-name="{{ $lead->leads->name }}" data-phone="{{ $lead->leads->phone }}">Leads Mark Convert</a>
                                   </td>
@@ -105,8 +120,9 @@
                 </div>
                 <div class="mb-3">
                     <label for="lead_comment" class="form-label">Comments:</label>
-                    <textarea name="lead_comment" id="lead_comment" class="form-control" rows="3"></textarea>
-                </div>
+                    <!-- <textarea name="lead_comment" id="lead_comment" class="form-control" rows="3"></textarea> -->
+                    <textarea  name="lead_comment" class="form-lead_comment summernoteExample" id="summernoteExample"  rows="6"></textarea> 
+                  </div>
                 <div class="mb-3">
                     <label for="lead_amount" class="form-label">Amounts:</label>
                     <textarea type="number" name="lead_amount" id="lead_amount" class="form-control" rows="3"></textarea>
