@@ -107,6 +107,10 @@
                     <label for="lead_comment" class="form-label">Comments:</label>
                     <textarea name="lead_comment" id="lead_comment" class="form-control" rows="3"></textarea>
                 </div>
+                <div class="mb-3">
+                    <label for="lead_amount" class="form-label">Amounts:</label>
+                    <textarea type="number" name="lead_amount" id="lead_amount" class="form-control" rows="3"></textarea>
+                </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
