@@ -10,4 +10,9 @@ class Attendance extends Model
     use HasFactory;
     protected $table = 'attendance';
     protected $guarded = [];  
+
+    public function users()
+    {
+        return $this->hasOne(\App\Models\User::class,'id','user_id');
+    }
 }

@@ -132,7 +132,6 @@ class LeadsController extends Controller
         $userLead->status = 'pick';
         $userLead->save();
 
-
         return redirect()->route('leads.index')->with('success', 'Leads Pick successfully');
     }
 
