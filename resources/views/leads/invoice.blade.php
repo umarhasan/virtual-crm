@@ -2,7 +2,18 @@
 
 
 @section('content')
+<style>
+  /* Custom styles for the button */
+.btn-view {
+    font-size: 14px; /* Adjust the font size as needed */
+}
 
+/* Custom styles for the status */
+.status-badge {
+    font-size: 12px; /* Adjust the font size as needed */
+    padding: 6px 8px; /* Adjust the padding as needed */
+}
+</style>
 <div class="main-panel">
   <div class="content-wrapper">
     <div class="row">
@@ -48,21 +59,20 @@
                       <tbody>
                         @if($lead_accepted)
                             @php $i=0; @endphp
-                            @foreach($lead_accepted as $lead)
+                              @foreach($lead_accepted as $lead)
                                 @php $i++; @endphp    
                                 <tr>
                                     <td>{{ $i }}</td>
                                     <td>{{ $lead->users->name }}</td>
                                     <td>{{ $lead->leads->name }}</td>
                                     <td>{{ $lead->leads->phone }}</td>
-                                    <td>{{ $lead->comment }}</td>
-                                    <td>{{ $lead->status }}</td>
+                                    <td>{!! $lead->comment !!}</td>
+                                    <td><span style="color:#156731;font-weight:bold;font-size:15px">{{ $lead->status }}</span></td>
                                     <td>
-                                    <a href="{{ route('leads.invoice.show',$lead->lead_id) }}" class="btn btn-warning btn-sm">View</a>    
-                                   
+                                        <a href="{{ route('leads.invoice.show', $lead->lead_id) }}" class="btn btn-warning btn-sm btn-view">View</a>
                                     </td>
-                                </tr>
-                            @endforeach
+                                  </tr>
+                              @endforeach
                         @endif  
                       </tbody>
                     </table>

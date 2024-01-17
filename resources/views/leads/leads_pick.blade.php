@@ -56,13 +56,13 @@
                                     <td>{{ $lead->leads->phone }}</td>
                                   @if(isset($lead) && $lead->status == 'pending')
                                     <td>{!! $lead->comment !!}</td>
-                                    <td><span class="btn btn-warning btn-sm">{{ $lead->status }}</span></td>
+                                    <td><span style="color:orange;font-weight:bold;font-size:17px">{{ $lead->status }}</span></td>
                                   @elseif($lead->status == 'rejected')
                                     <td>{!! $lead->comment !!}</td>
-                                    <td><span class="btn btn-danger btn-sm">{{ $lead->status }}</span></td>
+                                    <td><span style="color:red;font-weight:bold;font-size:17px">{{ $lead->status }}</span></td>
                                   @else
                                     <td>{!! $lead->comment !!}</td>
-                                    <td><span class="btn btn-primary btn-sm">{{ $lead->status }}</span></td>
+                                    <td><span style="color:#392C70;font-weight:bold;font-size:17px">{{ $lead->status }}</span></td>
                                   @endif
                                     <td><a class="btn btn-primary btn-sm" data-toggle="modal" data-target="#leadModal" data-lead-id="{{ $lead->leads->id }}" data-name="{{ $lead->leads->name }}" data-phone="{{ $lead->leads->phone }}">Leads Mark Convert</a></td>
                                 </tr>

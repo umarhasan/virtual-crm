@@ -41,7 +41,7 @@
                             </div>
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-12">
-                        <div class=" form-group">
+                        <!-- <div class=" form-group">
                                 <strong>Permission:</strong>
                                 <div class="row ps-lg-4">
               
@@ -59,7 +59,7 @@
                                 @endforeach
                            </div>
                           </div>  
-                        </div>
+                        </div> -->
                         <div class="col-xs-12 col-sm-12 col-md-12 text-center">
                             <button type="submit" class="btn btn-primary">Submit</button>
                         </div>

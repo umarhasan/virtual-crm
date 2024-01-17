@@ -125,14 +125,24 @@ class LeadsController extends Controller
         return redirect()->route('leads.index')->with('success', 'Leads deleted successfully');
     }
 
-    public function LeadAccepted($id){
+    public function LeadAccepted($id)
+    {
+        // Check if the user has already picked the lead
+        $existingUserLead = UserLead::where('lead_id', $id)
+            ->where('user_id', Auth::id())
+            ->first();
+        if ($existingUserLead) {
+            return redirect()->route('leads.index')->with('error', 'You have already picked this lead.');
+        }
+    
+        // If the user has not picked the lead before, proceed to save the new UserLead record
         $userLead = new UserLead();
         $userLead->lead_id = $id;
-        $userLead->user_id  = Auth::id();
+        $userLead->user_id = Auth::id();
         $userLead->status = 'pick';
         $userLead->save();
-
-        return redirect()->route('leads.index')->with('success', 'Leads Pick successfully');
+    
+        return redirect()->route('leads.index')->with('success', 'Leads picked successfully');
     }
 
     public function LeadsPick(){
