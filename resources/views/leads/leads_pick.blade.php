@@ -34,7 +34,7 @@
                   <!-- /.card-header -->
                   <div class="card-body">
                     <table id="order-listing" class="table dataTable no-footer" role="grid" aria-describedby="order-listing_info">
-                    <thead>
+                      <thead>
                         <tr>
                           <th>#</th>
                           <th>users</th>
@@ -44,12 +44,12 @@
                           <th>Status</th>
                           <th>Action</th>
                         </tr>
-                        </thead>
+                      </thead>
                       <tbody>
                         @php $i=0; @endphp
                           @foreach($lead_pick as $lead)
                           @php $i++; @endphp    
-                          <tr>
+                              <tr>
                                   <td>{{ $i }}</td>
                                   <td>{{ $lead->users->name }}</td>
                                   <td>{{ $lead->leads->name }}</td>
@@ -58,23 +58,22 @@
                                   <td>{!! $lead->comment !!}</td>
                                     <td><span class="btn btn-warning btn-sm">{{ $lead->status }}</span></td>
                                   @elseif($lead->status == 'rejected')
-                                  <td>{!! $lead->comment !!}</td>
+                                    <td>{!! $lead->comment !!}</td>
                                     <td><span class="btn btn-danger btn-sm">{{ $lead->status }}</span></td>
                                   
                                     @else
                                     <td>{!! $lead->comment !!}</td>
                                     <td><span class="btn btn-primary btn-sm">{{ $lead->status }}</span></td>
-                                  
                                   @endif
-                                
-                                  <td>
-                                  <a class="btn btn-primary btn-sm" data-toggle="modal" data-target="#leadModal" data-lead-id="{{ $lead->leads->id }}" data-name="{{ $lead->leads->name }}" data-phone="{{ $lead->leads->phone }}">Leads Mark Convert</a>
-                                  </td>
+                                    <td>
+                                      <a class="btn btn-primary btn-sm" data-toggle="modal" data-target="#leadModal" data-lead-id="{{ $lead->leads->id }}" data-name="{{ $lead->leads->name }}" data-phone="{{ $lead->leads->phone }}">Leads Mark Convert</a>
+                                    </td>
                               </tr>
                           @endforeach
                       </tbody>
                     </table>
                   </div>
+
                 </div>
               </div>
             </div>
@@ -90,7 +89,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header bg-primary text-white">
-        <h5 class="modal-title" id="leadModalLabel">Lead Details</h5>
+        <h5 class="modal-title" id="leadModalLabel">Lead Details </h5>
         <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
