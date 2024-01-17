@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Package;
+use App\Models\Packages;
 use App\Models\User;
 use Session;
 use Auth;
@@ -13,7 +13,7 @@ class PackagesController extends Controller
     public function index()
     {
 
-        $data['package'] = Package::with('users')->get();
+        $data['package'] = Packages::with('users')->get();
         return view('package/index',$data);
     }
 
@@ -37,7 +37,7 @@ class PackagesController extends Controller
             // other validation rules for your form fields
         ]);
             
-            $package = Package::create([
+            $package = Packages::create([
                 'package_name' => request()->input('package_name'),
                 'package_amount' => request()->input('package_amount'),
                 'description' => request()->input('description'),
@@ -72,7 +72,7 @@ class PackagesController extends Controller
         ]);
             
 
-        $package = Package::find($id);
+        $package = Packages::find($id);
         $package->update([
             'package_name' => request()->input('package_name'),
             'package_amount' => request()->input('package_amount'),
@@ -89,7 +89,7 @@ class PackagesController extends Controller
    
     public function destroy($id)
     {
-        $package = Package::find($id);
+        $package = Packages::find($id);
         $package->delete();
         session::flash('success','Record has been deleted Successfully');
         return redirect('packages');

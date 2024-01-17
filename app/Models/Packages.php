@@ -11,4 +11,9 @@ class Packages extends Model
     protected $table ='packages';
     protected $guarded=[];
 
+    public function users()
+    {
+        return $this->hasOne(User::class,'id','user_id');
+    }
+
 }
