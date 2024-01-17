@@ -56,7 +56,6 @@
                             </tr>
                             <tr>
                                 <td>{{ $invoice->id }}</td>
-                                <td>${{ $invoice->amount }}</td>
                                 <td>{{ $invoice->created_at->format('Y-m-d H:i:s') }}</td>
                             </tr>
                             
