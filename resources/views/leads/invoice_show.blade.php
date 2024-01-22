@@ -43,23 +43,23 @@
                                 <h5>Lead Information</h5>
                                 <p><strong>Lead Name:</strong> {{ $invoice->leads->name }}</p>
                                 <p><strong>Lead Phone:</strong> {{ $invoice->leads->phone }}</p>
+                                <p><strong>Status:</strong>&nbsp;&nbsp;<span style="color:#156731;font-weight:bold;font-size:15px"> {{ $invoice->status }} </span></p>
+                     
                             </div>
                         </div>
                         <hr>
                         <h5>Invoice Details</h5>
                         <table class="table table-bordered">
                             <tr>
-                                <th>#</th>
-                                <th>Amount</th>
-                                <th>Created at</th>
-                                
+                              <th>#</th>
+                              <th>Amount</th>
+                              <th>Created at</th>
                             </tr>
                             <tr>
                                 <td>{{ $invoice->id }}</td>
                                 <td>${{ $invoice->amount }} </td>
                                 <td>{{ $invoice->created_at->format('Y-m-d H:i:s') }}</td>
                             </tr>
-                            
                         </table>
                     </div>
                     <div class="card-footer">

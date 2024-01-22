@@ -633,12 +633,12 @@
           @endcan
           @can('mail-inbox')
           <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" href="#mail-layouts" aria-expanded="false" aria-controls="mail-layouts">
+            <a class="nav-link" data-toggle="collapse" href="#mail-inbox-layouts" aria-expanded="false" aria-controls="mail-layouts">
               <i class="fa fa-users menu-icon"></i>
               <span class="menu-title">Mailbox</span>
               <i class="menu-arrow"></i>
             </a>
-            <div class="collapse" id="mail-layouts">
+            <div class="collapse" id="mail-inbox-layouts">
               <ul class="nav flex-column sub-menu">
                 <li class="nav-item"> <a class="nav-link" href="{{route('mail.index')}}">Mail</a></li>
               </ul>
