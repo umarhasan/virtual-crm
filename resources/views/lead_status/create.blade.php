@@ -72,9 +72,9 @@ Create Leads Status
 
             </div>
           </div> 
-        </div>   
-      </section>
+        </section>
+      </div>   
     </div>
   </div>
-
+</div>
 @endsection
