@@ -16,51 +16,44 @@
                       <div class="statistics-item">
                         <p>
                           <i class="icon-sm fa fa-user mr-2"></i>
-                          New users
+                          Users
                         </p>
-                        <h2>54000</h2>
-                        <label class="badge badge-outline-success badge-pill">2.7% increase</label>
+                        <a href="/users" class="btn text-white">
+                          <h2>{{ $users }}</h2>
+                      </a>
+                       
                       </div>
                       <div class="statistics-item">
                         <p>
                           <i class="icon-sm fas fa-hourglass-half mr-2"></i>
-                          Avg Time
+                          Leads
                         </p>
-                        <h2>123.50</h2>
-                        <label class="badge badge-outline-danger badge-pill">30% decrease</label>
+                        <a href="/leads" class="btn text-white">
+                          <h2>{{ $leads }}</h2>
+                      </a>
+                        
                       </div>
                       <div class="statistics-item">
                         <p>
                           <i class="icon-sm fas fa-cloud-download-alt mr-2"></i>
-                          Downloads
+                          Projects
                         </p>
-                        <h2>3500</h2>
-                        <label class="badge badge-outline-success badge-pill">12% increase</label>
+                        <a href="/project" class="btn text-white">
+                          <h2>{{ $project }}</h2>
+                      </a>
+                        
                       </div>
                       <div class="statistics-item">
                         <p>
                           <i class="icon-sm fas fa-check-circle mr-2"></i>
-                          Update
+                          Clients
                         </p>
-                        <h2>7500</h2>
-                        <label class="badge badge-outline-success badge-pill">57% increase</label>
+                        <a href="/client" class="btn text-white">
+                          <h2>{{ $client }}</h2>
+                      </a>
+                        
                       </div>
-                      <div class="statistics-item">
-                        <p>
-                          <i class="icon-sm fas fa-chart-line mr-2"></i>
-                          Sales
-                        </p>
-                        <h2>9000</h2>
-                        <label class="badge badge-outline-success badge-pill">10% increase</label>
-                      </div>
-                      <div class="statistics-item">
-                        <p>
-                          <i class="icon-sm fas fa-circle-notch mr-2"></i>
-                          Pending
-                        </p>
-                        <h2>7500</h2>
-                        <label class="badge badge-outline-danger badge-pill">16% decrease</label>
-                      </div>
+                     
                   </div>
                 </div>
               </div>
