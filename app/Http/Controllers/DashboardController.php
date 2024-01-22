@@ -7,6 +7,9 @@ use Auth;
 use Hash;
 use Validator;
 use App\Models\User;
+use App\Models\Client;
+use App\Models\Project;
+use App\Models\Leads;
 use App\Models\Order;
 use App\Models\Product;
 use Session;
@@ -31,7 +34,12 @@ class DashboardController extends Controller
     public function index()
     {
         // return Auth::user();
-        $data['users'] = User::all()->count();
+        
+        $data['users'] = User::where('created_by', Auth::id())->count();
+        $data['project'] = Project::count();
+        $data['client'] = Client::count();
+        $data['leads'] = Leads::count();
+      
         return view('home',$data);
     }
     
