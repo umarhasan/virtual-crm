@@ -546,6 +546,23 @@
             </div>
           </li>
           @endcan
+          @can('product-list')
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#product-layouts" aria-expanded="false" aria-controls="product-layouts">
+              <i class="fa fa-users menu-icon"></i>
+              <span class="menu-title">Product List</span>
+              <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="product-layouts">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> <a class="nav-link" href="{{route('product.index')}}">List Product</a></li>
+                @can('product-create')
+                <li class="nav-item"> <a class="nav-link" href="{{route('product.create')}}">Add Product</a></li>
+                @endcan
+              </ul>
+            </div>
+          </li>
+          @endcan
           @can('shift-list')
           <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#shift-layouts" aria-expanded="false" aria-controls="shift-layouts">
