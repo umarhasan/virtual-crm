@@ -43,8 +43,8 @@
                         <tr>
                           <th>#</th>
                           <th>Leads</th>
-                          <th>Company</th>
-                          <th>Phone</th>
+                          <!-- <th>Company</th> -->
+                          <!-- <th>Phone</th> -->
                           <th>Action</th>
                         </tr>
                         </thead>
@@ -55,8 +55,8 @@
                               <tr>
                                   <td>{{ $i }}</td>
                                   <td>{{ $lead->name }}</td>
-                                  <td>{{ $lead->company_name }}</td>
-                                  <td>{{ $lead->phone }}</td>
+                                  <!-- <td>{{ $lead->company_name }}</td> -->
+                                  <!-- <td>{{ $lead->phone }}</td> -->
                                   <td>
                                      
                                     @if(isset($lead->LeadsUser) && $lead->LeadsUser->status == 'accepted')

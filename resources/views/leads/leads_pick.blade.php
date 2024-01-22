@@ -64,7 +64,9 @@
                                     <td>{!! $lead->comment !!}</td>
                                     <td><span style="color:#392C70;font-weight:bold;font-size:17px">{{ $lead->status }}</span></td>
                                   @endif
-                                    <td><a class="btn btn-primary btn-sm" data-toggle="modal" data-target="#leadModal" data-lead-id="{{ $lead->leads->id }}" data-name="{{ $lead->leads->name }}" data-phone="{{ $lead->leads->phone }}">Leads Mark Convert</a></td>
+                                    <td>
+                                    <a href="{{ route('leads.invoice.show', $lead->lead_id) }}" class="btn btn-warning btn-sm btn-view">Invoice View</a>
+                                    <!-- <a class="btn btn-primary btn-sm" data-toggle="modal" data-target="#leadModal" data-lead-id="{{ $lead->leads->id }}" data-name="{{ $lead->leads->name }}" data-phone="{{ $lead->leads->phone }}">Leads Mark Convert</a></td> -->
                                 </tr>
                               @endforeach
                       </tbody>
