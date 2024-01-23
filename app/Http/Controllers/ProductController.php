@@ -18,16 +18,7 @@ use Auth;
 
 class ProductController extends Controller
 {
-    function __construct()
-    {
-        //  $this->middleware('permission:user-list|user-create|user-edit|user-delete', ['only' => ['index','store']]);
-         $this->middleware('permission:product-list', ['only' => ['index']]);
-         $this->middleware('permission:product-create', ['only' => ['create','store']]);
-         $this->middleware('permission:product-edit', ['only' => ['edit','update']]);
-         $this->middleware('permission:product-delete', ['only' => ['destroy']]);
-        $this->middleware('permission:product-status', ['only' => ['status']]);
-         
-    }
+    
     
     public function index()
 	{
@@ -36,7 +27,7 @@ class ProductController extends Controller
         // return Product::join("role_has_permissions","role_has_permissions.role_id","=",$userid)->get();
 		if($role != 'Admin')
         {   
-            $product = Product::where('user_id',Auth::user()->id)->get();
+            $data['product'] = Product::where('user_id',Auth::user()->id)->get();
         }
         else
         {
@@ -58,14 +49,14 @@ class ProductController extends Controller
         
         $request->validate([
             'name' => 'required',
-            'company_users' => 'required',
+            // 'company_users' => 'required',
             'amount' =>'required',
             'description' =>'required',
         ]);
         
         $product = Product::create([
             'name' => request()->input('name'),
-            'company_users' => request()->input('company_user'),
+            'user_id' => Auth::id(),
             'amount' => request()->input('amount'),
             'description' => request()->input('description'),
         ]);
@@ -74,6 +65,11 @@ class ProductController extends Controller
 
     }
 
+    public function FetchProduct(){
+        $products = Product::all();
+        return response()->json($products);
+
+    }
  
     
 } 

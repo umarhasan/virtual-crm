@@ -99,7 +99,7 @@ Route::group(['middleware' => ['auth','verified']], function(){
     Route::get('product/{id}/images', [ProductController::class, 'images']);
   	Route::post('product/{id}/images', [ProductController::class, 'postImages']);
   	Route::get('product/image/{id}/delete', [ProductController::class, 'imgDelete']);
-    
+    Route::get('get/product', [ProductController::class, 'FetchProduct']);
     Route::resource('pages',PageController::class);
     Route::resource('sections',SectionController::class);
     Route::resource('general_setting',GeneralSettingController::class);

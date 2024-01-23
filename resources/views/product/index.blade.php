@@ -41,12 +41,11 @@
                                 <tr>
                                     <th>Id</th>
                                     <th>Name</th>
-                                    <th>Company users</th>
                                     <th>Amount</th>
                                     <th>Description</th>
                                    
                                     <!-- Add more columns as needed -->
-                                    <th>Action</th>
+                                    <!-- <th>Action</th> -->
                                 </tr>
                             </thead>
                             <tbody>
@@ -57,19 +56,8 @@
                                         <tr>
                                             <td>{{ $id++ }}</td>
                                             <td>{{ $row->name }}</td>
-                                            <td>{{ $row->company_users }}</td>
                                             <td>{{ $row->amount }}</td>
                                             <td>{{ $row->description }}</td>
-                                        
-                                            <!-- Add more columns as needed -->
-                                            <td>
-                                                <a href="{{ route('Product.edit', $row->id) }}" class="btn btn-primary btn-sm">Edit</a>
-                                                <form action="{{ route('Products.destroy', $row->id) }}" method="post" style="display:inline;">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">Delete</button>
-                                                </form>
-                                            </td>
                                         </tr>
                                     @endforeach
                               </tbody>

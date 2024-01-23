@@ -8,6 +8,7 @@ use App\Models\LeadStatus;
 use App\Models\LeadSources;
 use App\Models\User;
 use App\Models\UserLead;
+use App\Models\Product;
 use Auth;
 
 class LeadsController extends Controller
@@ -173,8 +174,13 @@ class LeadsController extends Controller
         return view('leads.invoice',compact('lead_accepted'));
     }
 
-    public function LeadsInvoiceShow($id){
-        $invoice = UserLead::with('users','leads')->where('lead_id',$id)->first();
-        return view('leads.invoice_show',compact('invoice'));
-    }
+    public function LeadsInvoiceShow($id)
+{
+    $invoice = UserLead::with('users', 'leads')->where('lead_id', $id)->first();
+    $user = Auth::user()->name;
+    $products = Product::get();
+
+   
+    return view('leads.invoice_show', compact('invoice', 'products'));
+}
 }
