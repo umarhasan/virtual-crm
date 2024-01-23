@@ -62,6 +62,49 @@ class ProductController extends Controller
          session::flash('success','Record Uploaded Successfully');
          return redirect('product')->with('success','Record Uploaded Successfully');
      }
+
+     
+   
+    public function edit($id)
+    {
+        $data['users'] = User::get();
+        $data['product'] = Product::find($id);
+        //dd($product);
+        return view('product.Edit', $data);
+    }
+
+   
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'name'=> 'required',
+            'Amount'=> 'required',
+            'description'=> 'required',
+        
+            // other validation rules for your form fields
+        ]);
+            
+
+        $product = Product::find($id);
+        $product->update([
+            'name' => request()->input('name'),
+            'Amount' => request()->input('Amount'),
+            'description' => request()->input('description'),
+            'user_id' => Auth::id(),
+        ]);
+
+       
+        return redirect('product')->with('success','Record Uploaded Successfully');
+          
+    }
+
+     public function destroy($id)
+     {
+         $product = Product::find($id);
+         $product->delete();
+         session::flash('success','Record has been deleted Successfully');
+         return redirect('product');
+     }
      
 
  
