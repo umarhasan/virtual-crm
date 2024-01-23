@@ -51,23 +51,23 @@
                             </thead>
                             <tbody>
                                    @php 
-                                    $id = 1;
+                                    $id=1;
                                     @endphp
                                     @foreach($product as $row)
                                         <tr>
                                             <td>{{ $id++ }}</td>
                                             <td>{{ $row->name }}</td>
-                                            <td>{{ $row->company_users }}</td>
-                                            <td>{{ $row->amount }}</td>
+                                            <td>{{ $row->users->name }}</td>
+                                            <td>{{ $row->Amount }}</td>
                                             <td>{{ $row->description }}</td>
                                         
                                             <!-- Add more columns as needed -->
                                             <td>
-                                                <a href="{{ route('Product.edit', $row->id) }}" class="btn btn-primary btn-sm">Edit</a>
-                                                <form action="{{ route('Products.destroy', $row->id) }}" method="post" style="display:inline;">
+                                                <a href="{{ route('product.edit', $row->id) }}" class="btn btn-primary btn-b">Edit</a>
+                                                <form action="{{ route('product.destroy', $row->id) }}" method="post" style="display:inline;">
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">Delete</button>
+                                                    <button type="submit" class="btn btn-danger btn-b" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')"><i class="fa fa-trash"></i></button>
                                                 </form>
                                             </td>
                                         </tr>
@@ -84,3 +84,4 @@
   </div>
 </div>
 @endsection
+

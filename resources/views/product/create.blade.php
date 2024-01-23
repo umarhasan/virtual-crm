@@ -49,17 +49,11 @@
                                 <input type="text" name="name" class="form-control" required placeholder="Name">
                               </div>
                             </div>
-                            <div class="col-md-4">
-                              <div class="form-group">
-                                <label>Company User:</label>
-                                <input type="text" name="company_user" class="form-control" required placeholder="User">
-                              </div>
-                            </div>
 
                             <div class="col-md-4">
                               <div class="form-group">
                                 <label>Amount:</label>
-                                <input type="number" name="amount" class="form-control" required placeholder="Amount">
+                                <input type="number" name="Amount" class="form-control" required placeholder="Amount">
                               </div>
                             </div>
                             </div>
