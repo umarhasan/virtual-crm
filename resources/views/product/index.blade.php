@@ -51,7 +51,7 @@
                             </thead>
                             <tbody>
                                    @php 
-                                    $id = 1;
+                                    $id=1;
                                     @endphp
                                     @foreach($product as $row)
                                         <tr>
@@ -84,3 +84,4 @@
   </div>
 </div>
 @endsection
+

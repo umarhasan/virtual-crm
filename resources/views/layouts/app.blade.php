@@ -217,6 +217,11 @@
                 <i class="fas fa-cog text-primary"></i>
                 Settings
               </a>
+              <a href="{{ url('/profile')}}" class="dropdown-item">
+              <i class="fa-solid fa-user text-primary"></i>
+                
+                Profile
+              </a>
               <div class="dropdown-divider"></div>
               <a href="{{url('/logout')}}" class="dropdown-item">
                 <i class="fas fa-power-off text-primary"></i>
