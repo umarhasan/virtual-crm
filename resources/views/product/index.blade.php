@@ -63,11 +63,11 @@
                                         
                                             <!-- Add more columns as needed -->
                                             <td>
-                                                <a href="{{ route('product.edit', $row->id) }}" class="btn btn-primary btn-sm">Edit</a>
+                                                <a href="{{ route('product.edit', $row->id) }}" class="btn btn-primary btn-b">Edit</a>
                                                 <form action="{{ route('product.destroy', $row->id) }}" method="post" style="display:inline;">
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">Delete</button>
+                                                    <button type="submit" class="btn btn-danger btn-b" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')"><i class="fa fa-trash"></i></button>
                                                 </form>
                                             </td>
                                         </tr>

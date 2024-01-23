@@ -60,7 +60,7 @@
                           <td>{{ $row->time_out }}</td>
                           <td>{{ $row->status }}</td>
                           <td>
-                                    <div class="btn-group">
+                                <div class="btn-group">
                                         @can('attendance-edit')
                                         <a class="btn btn-primary btn-a" href="{{ route('attendance.edit',$row->id) }}">Edit</a> &nbsp;
                                         @endcan
@@ -75,7 +75,7 @@
                                         @endcan
                                     </div>
                                 </td>
-                        </tr>
+                           </tr>   
                         @endforeach
                       </tbody>
                     </table>
