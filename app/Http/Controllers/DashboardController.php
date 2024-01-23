@@ -45,7 +45,8 @@ class DashboardController extends Controller
     
     public function profile()
     {
-        return view('profile');
+        $data['user'] = User::find(Auth::user()->id);
+        return view('profile', $data);
     }
     
     public function update(Request $request)
@@ -65,6 +66,34 @@ class DashboardController extends Controller
         return redirect()->back();
 
     }
+
+    public function edit($id)
+        {
+            $data['user'] = User::find($id);
+            $profile = $user->profile; // assuming there is a one-to-one relationship between User and Profile
+
+            return view('profile', $data);
+        }
+
+    public function profileupdate(Request $request){
+
+        // dd($request->all());
+
+        $user = User::find(Auth::user()->id);
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->phone = $request->phone_number;
+        $user->address = $request->address;
+        $user->image = $request->image;
+        dd($user);
+        $user->created_by = auth()->user()->id;
+        $user->save();
+        
+       
+
+        session::flash('success','Record Updated Successfully');
+        return redirect('profile')->with('success','Record Uploaded Successfully');
+}
 
     public function change_password()
     {

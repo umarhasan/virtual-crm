@@ -43,21 +43,29 @@
                                     <th>Name</th>
                                     <th>Amount</th>
                                     <th>Description</th>
-                                   
-                                    <!-- Add more columns as needed -->
-                                    <!-- <th>Action</th> -->
+                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
                                    @php 
-                                    $id = 1;
+                                    $id=1;
                                     @endphp
-                                    @foreach($product as $row)
+                                    @foreach($product as $pro)
                                         <tr>
                                             <td>{{ $id++ }}</td>
-                                            <td>{{ $row->name }}</td>
-                                            <td>{{ $row->amount }}</td>
-                                            <td>{{ $row->description }}</td>
+                                            <td>{{ $pro->name }}</td>
+                                            <td>{{ isset($pro->Amount) ? $pro->Amount : '' }}</td>
+                                            <td>{!! $pro->description !!}</td>
+                                        
+                                            <!-- Add more columns as needed -->
+                                            <td>
+                                                <a href="{{ route('product.edit', $pro->id) }}" class="btn btn-primary btn-sm">Edit</a>
+                                                <form action="{{ route('product.destroy', $pro->id) }}" method="post" style="display:inline;">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">Delete</button>
+                                                </form>
+                                            </td>
                                         </tr>
                                     @endforeach
                               </tbody>
@@ -72,3 +80,4 @@
   </div>
 </div>
 @endsection
+

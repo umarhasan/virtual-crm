@@ -15,6 +15,7 @@ use App\Models\VeriantSize;
 use App\Models\VeriantColor;
 use App\Models\User;
 use Auth;
+use Session;
 
 class ProductController extends Controller
 {
@@ -40,29 +41,53 @@ class ProductController extends Controller
      public function create(Request $request){
         //  $categories = Category::get();
         //  $subcat = SubCategory::get();
-         $vendors = User::get();
+         $product = User::get();
          return view('product.create');
      }
 
-    public function store(Request $request)
+     public function store(Request $request)
+     {
+         $request->validate([
+             'name' => 'required',      
+             'Amount' =>'required',
+             'description' =>'required',
+         ]);
+     
+         // Assuming you have a Product model at the top of your file, like: use App\Models\Product;
+         $product =  Product::create([
+             'name' => $request->input('name'),
+             'Amount' => $request->input('Amount'),
+             'description' => $request->input('description'),
+             'user_id' => Auth::id(),
+         ]);
+    
+         session::flash('success','Record Uploaded Successfully');
+         return redirect('product')->with('success','Record Uploaded Successfully');
+     }
+
+     
+   
+    public function edit($id)
     {
-        
-        $request->validate([
-            'name' => 'required',
-            // 'company_users' => 'required',
-            'amount' =>'required',
-            'description' =>'required',
-        ]);
-        
-        $product = Product::create([
+        $data['users'] = User::get();
+        $data['product'] = Product::find($id);
+        return view('product.Edit', $data);
+    }
+
+   
+    public function update(Request $request, $id)
+    {
+        $product = Product::find($id);
+        $product->update([
             'name' => request()->input('name'),
-            'user_id' => Auth::id(),
-            'amount' => request()->input('amount'),
+            'Amount' => request()->input('Amount'),
             'description' => request()->input('description'),
+            'user_id' => Auth::id(),
         ]);
 
-        return redirect('product');
-
+       
+        return redirect('product')->with('success','Record Uploaded Successfully');
+          
     }
 
     public function FetchProduct(){
@@ -70,6 +95,7 @@ class ProductController extends Controller
         return response()->json($products);
 
     }
+
  
     
 } 

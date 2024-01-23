@@ -55,8 +55,7 @@ class PackagesController extends Controller
     public function edit($id)
     {
         $data['users'] = User::get();
-        $data['package'] = Package::find($id);
-        //dd($package);
+        $data['package'] = Packages::find($id);
         return view('package.packageEdit', $data);
     }
 

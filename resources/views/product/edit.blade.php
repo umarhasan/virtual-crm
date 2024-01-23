@@ -44,33 +44,23 @@
                             <div class="col-md-4">
                               <div class="form-group">
                                 <label>Name:</label>
-                                <input type="text" name="name" class="form-control" required placeholder="Name">
+                                <input type="text" name="name" value='{{ $product->name }}' class="form-control" required placeholder="Name">
                               </div>
                             </div>
+
                             <div class="col-md-4">
                               <div class="form-group">
                                 <label>Amount:</label>
-                                <input type="number" name="amount" class="form-control" required placeholder="Amount">
+                                <input type="number" name="Amount" value='{{ $product->Amount }}' class="form-control" required placeholder="Amount">
                               </div>
                             </div>
-                          
-                            
-                            <div class="col-md-4">
-                              <div class="form-group">
-                                <label>Company User:</label>
-                                <input type="text" name="company_user" class="form-control" required placeholder="User">
-                              </div>
-                            </div>
-
-                          
-
 
                           </div>
                             <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group {{ $errors->has('description') ? 'has-error' : null }}">
                                   <label style="margin-top: 10px;" for="Description">Description <span class="text text-red">*</span></label>
-                                 <textarea  name="description" class="form-control summernoteExample" id="summernoteExample"  rows="6"></textarea>
+                                 <textarea  name="description" value='{{ $product->description }}' class="form-control summernoteExample" id="summernoteExample"  rows="6">{{ $product->description }}</textarea>
                                 </div>
                             </div>
                           </div>
