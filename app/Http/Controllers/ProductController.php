@@ -15,6 +15,7 @@ use App\Models\VeriantSize;
 use App\Models\VeriantColor;
 use App\Models\User;
 use Auth;
+use Session;
 
 class ProductController extends Controller
 {
@@ -31,48 +32,37 @@ class ProductController extends Controller
     
     public function index()
 	{
-        $userid =  Auth::user()->roles['0']->pivot->role_id;
-        $role = Role::find($userid)->name;
-        // return Product::join("role_has_permissions","role_has_permissions.role_id","=",$userid)->get();
-		if($role != 'Admin')
-        {   
-            $product = Product::where('user_id',Auth::user()->id)->get();
-        }
-        else
-        {
-            $data['product'] = Product::get();
-        }
-
-	    return view('product.index', $data);
+            $data['product'] = Product::with('users')->get();   
+	        return view('product.index', $data);
 	}
 
      public function create(Request $request){
         //  $categories = Category::get();
         //  $subcat = SubCategory::get();
-         $vendors = User::get();
+         $product = User::get();
          return view('product.create');
      }
 
-    public function store(Request $request)
-    {
-        
-        $request->validate([
-            'name' => 'required',
-            'company_users' => 'required',
-            'amount' =>'required',
-            'description' =>'required',
-        ]);
-        
-        $product = Product::create([
-            'name' => request()->input('name'),
-            'company_users' => request()->input('company_user'),
-            'amount' => request()->input('amount'),
-            'description' => request()->input('description'),
-        ]);
-
-        return redirect('product');
-
-    }
+     public function store(Request $request)
+     {
+         $request->validate([
+             'name' => 'required',      
+             'Amount' =>'required',
+             'description' =>'required',
+         ]);
+     
+         // Assuming you have a Product model at the top of your file, like: use App\Models\Product;
+         $product =  Product::create([
+             'name' => $request->input('name'),
+             'Amount' => $request->input('Amount'),
+             'description' => $request->input('description'),
+             'user_id' => Auth::id(),
+         ]);
+    
+         session::flash('success','Record Uploaded Successfully');
+         return redirect('product')->with('success','Record Uploaded Successfully');
+     }
+     
 
  
     

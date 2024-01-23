@@ -11,28 +11,10 @@ class Product extends Model
     protected $table = 'product';
     protected $guarded = ['id'];
 
-    public function subcategory()
+
+    public function users()
     {
-        return $this->hasOne(SubCategory::class,'id','subcat_id');
+        return $this->hasOne(User::class,'id','user_id');
     }
-    
-    public function subcat()
-    {
-        return $this->hasMany(SubCategory::class,'id','subcat_id');
-    }
-    
-    public function size()
-    {
-        return $this->hasMany(VeriantSize::class,'product_id','id');
-    }
-    
-    public function color()
-    {
-        return $this->hasMany(VeriantColor::class,'product_id','id');
-    }
-    
-    public function images()
-    {
-        return $this->hasMany(ProductImage::class,'product_id','id');
-    }
+
 }
