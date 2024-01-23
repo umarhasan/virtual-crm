@@ -77,6 +77,7 @@ class DashboardController extends Controller
 
     public function profileupdate(Request $request){
 
+        // dd($request->all());
 
         $user = User::find(Auth::user()->id);
         $user->name = $request->name;
@@ -84,6 +85,7 @@ class DashboardController extends Controller
         $user->phone = $request->phone_number;
         $user->address = $request->address;
         $user->image = $request->image;
+        dd($user);
         $user->created_by = auth()->user()->id;
         $user->save();
         

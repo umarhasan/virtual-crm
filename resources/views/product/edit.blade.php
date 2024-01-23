@@ -60,7 +60,7 @@
                             <div class="col-md-12">
                                 <div class="form-group {{ $errors->has('description') ? 'has-error' : null }}">
                                   <label style="margin-top: 10px;" for="Description">Description <span class="text text-red">*</span></label>
-                                 <textarea  name="description" value='{{ $product->description }}' class="form-control summernoteExample" id="summernoteExample"  rows="6"></textarea>
+                                 <textarea  name="description" value='{{ $product->description }}' class="form-control summernoteExample" id="summernoteExample"  rows="6">{{ $product->description }}</textarea>
                                 </div>
                             </div>
                           </div>

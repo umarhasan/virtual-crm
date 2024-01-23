@@ -19,21 +19,23 @@ use Session;
 
 class ProductController extends Controller
 {
-    function __construct()
-    {
-        //  $this->middleware('permission:user-list|user-create|user-edit|user-delete', ['only' => ['index','store']]);
-         $this->middleware('permission:product-list', ['only' => ['index']]);
-         $this->middleware('permission:product-create', ['only' => ['create','store']]);
-         $this->middleware('permission:product-edit', ['only' => ['edit','update']]);
-         $this->middleware('permission:product-delete', ['only' => ['destroy']]);
-        $this->middleware('permission:product-status', ['only' => ['status']]);
-         
-    }
+    
     
     public function index()
 	{
-            $data['product'] = Product::with('users')->get();   
-	        return view('product.index', $data);
+        $userid =  Auth::user()->roles['0']->pivot->role_id;
+        $role = Role::find($userid)->name;
+        // return Product::join("role_has_permissions","role_has_permissions.role_id","=",$userid)->get();
+		if($role != 'Admin')
+        {   
+            $data['product'] = Product::where('user_id',Auth::user()->id)->get();
+        }
+        else
+        {
+            $data['product'] = Product::get();
+        }
+
+	    return view('product.index', $data);
 	}
 
      public function create(Request $request){
@@ -69,22 +71,12 @@ class ProductController extends Controller
     {
         $data['users'] = User::get();
         $data['product'] = Product::find($id);
-        //dd($product);
         return view('product.Edit', $data);
     }
 
    
     public function update(Request $request, $id)
     {
-        $request->validate([
-            'name'=> 'required',
-            'Amount'=> 'required',
-            'description'=> 'required',
-        
-            // other validation rules for your form fields
-        ]);
-            
-
         $product = Product::find($id);
         $product->update([
             'name' => request()->input('name'),
@@ -98,14 +90,11 @@ class ProductController extends Controller
           
     }
 
-     public function destroy($id)
-     {
-         $product = Product::find($id);
-         $product->delete();
-         session::flash('success','Record has been deleted Successfully');
-         return redirect('product');
-     }
-     
+    public function FetchProduct(){
+        $products = Product::all();
+        return response()->json($products);
+
+    }
 
  
     

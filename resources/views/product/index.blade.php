@@ -41,11 +41,8 @@
                                 <tr>
                                     <th>Id</th>
                                     <th>Name</th>
-                                    <th>Company users</th>
                                     <th>Amount</th>
                                     <th>Description</th>
-                                   
-                                    <!-- Add more columns as needed -->
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -53,21 +50,20 @@
                                    @php 
                                     $id=1;
                                     @endphp
-                                    @foreach($product as $row)
+                                    @foreach($product as $pro)
                                         <tr>
                                             <td>{{ $id++ }}</td>
-                                            <td>{{ $row->name }}</td>
-                                            <td>{{ $row->users->name }}</td>
-                                            <td>{{ $row->Amount }}</td>
-                                            <td>{{ $row->description }}</td>
+                                            <td>{{ $pro->name }}</td>
+                                            <td>{{ isset($pro->Amount) ? $pro->Amount : '' }}</td>
+                                            <td>{!! $pro->description !!}</td>
                                         
                                             <!-- Add more columns as needed -->
                                             <td>
-                                                <a href="{{ route('product.edit', $row->id) }}" class="btn btn-primary btn-b">Edit</a>
-                                                <form action="{{ route('product.destroy', $row->id) }}" method="post" style="display:inline;">
+                                                <a href="{{ route('product.edit', $pro->id) }}" class="btn btn-primary btn-sm">Edit</a>
+                                                <form action="{{ route('product.destroy', $pro->id) }}" method="post" style="display:inline;">
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger btn-b" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')"><i class="fa fa-trash"></i></button>
+                                                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">Delete</button>
                                                 </form>
                                             </td>
                                         </tr>
