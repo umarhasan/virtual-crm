@@ -1,7 +1,5 @@
 @extends('layouts.app')
-
 @section('content')
-
 <div class="main-panel">
     <div class="content-wrapper">
         <div class="row">
@@ -22,10 +20,8 @@
                         </div>
                     </div><!-- /.container-fluid -->
                 </section>
-
                 <section class="content">
                     <div class="container-fluid">
-
                         <div class="row">
                             <div class="col-12">
                                 <div class="card">
@@ -46,7 +42,6 @@
                                                     <div class=" form-group">
                                                         <strong>Permission:</strong>
                                                         <div class="row ps-lg-4">
-
                                                             <!-- Master Checkbox for Select All -->
                                                             <div class="col-lg-4">
                                                                 <div class="my-txt-box">
@@ -55,9 +50,7 @@
                                                                     <label class="my-label" for="checkAll">Select All</label>
                                                                 </div>
                                                             </div>
-
                                                             @foreach($permission as $value)
-
                                                             <div class="col-lg-4">
                                                                 <div class="my-txt-box">
                                                                     <input type="checkbox" name="permission[]"
@@ -83,79 +76,69 @@
                     </div>
                 </section>
             </div>
-            <script>
+    <script>
+        $('.select2').select2()
+        // Initialize Select2 Elements
+        $('.select2bs4').select2({
+            theme: 'bootstrap4'
+        })
+        $(function () {
+            $("#example1").DataTable({
+                "responsive": true, "lengthChange": false, "autoWidth": false,
+                "buttons": []
+            }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+            $('#example2').DataTable({
+                "paging": true,
+                "lengthChange": false,
+                "searching": false,
+                "ordering": true,
+                "info": true,
+                "autoWidth": false,
+                "responsive": true,
+            });
+        });
+    </script>
+    <script type="text/javascript">
+        var APP_URL = {!! json_encode(url('/')) !!}
+    </script>
+    <style>
+        .form-check-input {
+            border-radius: 0 !important;
+            height: 20px;
+            width: 20px;
+            margin: 0;
+        }
 
-                $('.select2').select2()
+        .form-group strong {
+            margin: 0 0 10px;
+            width: fit-content;
+            display: block;
+        }
 
-                // Initialize Select2 Elements
-                $('.select2bs4').select2({
-                    theme: 'bootstrap4'
-                })
+        .my-txt-box {
+            padding: 0 0 10px;
+        }
 
-                $(function () {
-                    $("#example1").DataTable({
-                        "responsive": true, "lengthChange": false, "autoWidth": false,
-                        "buttons": []
-                    }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-                    $('#example2').DataTable({
-                        "paging": true,
-                        "lengthChange": false,
-                        "searching": false,
-                        "ordering": true,
-                        "info": true,
-                        "autoWidth": false,
-                        "responsive": true,
-                    });
-                });
-            </script>
-
-            <script type="text/javascript">
-
-                var APP_URL = {!! json_encode(url('/')) !!}
-
-            </script>
-            <style>
-                .form-check-input {
-                    border-radius: 0 !important;
-                    height: 20px;
-                    width: 20px;
-                    margin: 0;
+        .my-label {
+            padding-left: 30px;
+            text-transform: capitalize;
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            // Check/uncheck all checkboxes based on master checkbox state
+            $('#checkAll').change(function () {
+                $('input[name="permission[]"]').prop('checked', $(this).prop('checked'));
+            });
+            // Check/uncheck master checkbox based on the state of individual checkboxes
+            $('input[name="permission[]"]').change(function () {
+                if ($('input[name="permission[]"]:checked').length === $('input[name="permission[]"]').length) {
+                    $('#checkAll').prop('checked', true);
+                } else {
+                    $('#checkAll').prop('checked', false);
                 }
-
-                .form-group strong {
-                    margin: 0 0 10px;
-                    width: fit-content;
-                    display: block;
-                }
-
-                .my-txt-box {
-                    padding: 0 0 10px;
-                }
-
-                .my-label {
-                    padding-left: 30px;
-                    text-transform: capitalize;
-                }
-            </style>
-
-
-            <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-            <script>
-                $(document).ready(function () {
-                    // Check/uncheck all checkboxes based on master checkbox state
-                    $('#checkAll').change(function () {
-                        $('input[name="permission[]"]').prop('checked', $(this).prop('checked'));
-                    });
-
-                    // Check/uncheck master checkbox based on the state of individual checkboxes
-                    $('input[name="permission[]"]').change(function () {
-                        if ($('input[name="permission[]"]:checked').length === $('input[name="permission[]"]').length) {
-                            $('#checkAll').prop('checked', true);
-                        } else {
-                            $('#checkAll').prop('checked', false);
-                        }
-                    });
-                });
-            </script>
-
-            @endsection
+            });
+        });
+    </script>
+@endsection

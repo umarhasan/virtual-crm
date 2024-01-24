@@ -49,10 +49,7 @@ Create Project
                         <div class="form-group {{ $errors->has('client_id') ? 'has-error' : null }}">
                             <label for="Project">Client <span class="text text-red">*</span></label>
                             <select name="client_id" style="width:100%" id="assign_client" required class="form-control">
-                                <option>--select client--</option>
-                                @foreach ($clients as $client)
-                                    <option value="{{ $client->id }}">{{ $client->name }}</option>
-                                @endforeach
+                                <option value="">--select client--</option>
                             </select>
                         </div>
                     </div>
@@ -73,7 +70,7 @@ Create Project
                         <div class="form-group {{ $errors->has('lead_id') ? 'has-error' : null }}">
                             <label for="lead_id">Leads<span class="text text-red">*</span></label>
                             <select name="lead_id" style="width:100%" class="form-control">
-                            <option value="">--Select Leads--</option>
+                            <option   option value="">--Select Leads--</option>
                                 @foreach ($leads as $lead)
                                     <option value="{{ $lead->id }}">{{ $lead->name }}</option>
                                 @endforeach

@@ -162,9 +162,10 @@
             </div>
           </div>
         </section>
+      </div>
     </div>
   </div>
-</div>
+<!-- </div> -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.18/summernote-bs4.min.js"></script>
 <script>
   $(document).ready(function() {

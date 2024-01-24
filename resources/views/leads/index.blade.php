@@ -6,7 +6,6 @@
   <div class="content-wrapper">
     <div class="row">
       <div class="content-wrapper">
-        <!-- Content Header (Page header) -->
         <section class="content-header">
           <div class="container-fluid">
             <div class="row mb-2">
@@ -28,7 +27,7 @@
               <div class="col-12">
                 <div class="card">
                   <div class="card-header">
-                    <h3 class="card-title">Users List</h3>
+                    <h3 class="card-title">Leads List</h3>
                   </div>
                   <!-- /.card-header -->
                   <div class="card-body">
@@ -39,15 +38,13 @@
                     </div>
                     <!-- <table id="example1" class="table table-bordered table-striped"> -->
                     <table id="order-listing" class="table dataTable no-footer" role="grid" aria-describedby="order-listing_info">
-                    <thead>
+                      <thead>
                         <tr>
                           <th>#</th>
                           <th>Leads</th>
-                          <!-- <th>Company</th> -->
-                          <!-- <th>Phone</th> -->
                           <th>Action</th>
                         </tr>
-                        </thead>
+                      </thead>
                       <tbody>
                           @php $i = 0; @endphp
                           @foreach($leads as $lead)
@@ -55,8 +52,7 @@
                               <tr>
                                   <td>{{ $i }}</td>
                                   <td>{{ $lead->name }}</td>
-                                  <!-- <td>{{ $lead->company_name }}</td> -->
-                                  <!-- <td>{{ $lead->phone }}</td> -->
+                                 
                                   <td>
                                      
                                     @if(isset($lead->LeadsUser) && $lead->LeadsUser->status == 'accepted')
@@ -77,6 +73,7 @@
                                   </td>
                               </tr>
                           @endforeach
+
                       </tbody>
                     </table>
                   </div>
@@ -85,7 +82,7 @@
             </div>
           </div>
         </section>
+      </div>
     </div>
   </div>
-</div>
 @endsection
