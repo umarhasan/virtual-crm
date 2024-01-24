@@ -14,6 +14,7 @@ use App\Models\Order;
 use App\Models\Product;
 use Session;
 
+
 class DashboardController extends Controller
 {
     /**
@@ -36,6 +37,7 @@ class DashboardController extends Controller
         // return Auth::user();
         
         $data['users'] = User::where('created_by', Auth::id())->count();
+        $data['users'] = User::with();
         $data['project'] = Project::count();
         $data['client'] = Client::count();
         $data['leads'] = Leads::count();
@@ -45,8 +47,9 @@ class DashboardController extends Controller
     
     public function profile()
     {
-        $data['user'] = User::find(Auth::user()->id);
-        return view('profile', $data);
+
+      
+        return view('profile');
     }
     
     public function update(Request $request)
@@ -85,7 +88,6 @@ class DashboardController extends Controller
         $user->phone = $request->phone_number;
         $user->address = $request->address;
         $user->image = $request->image;
-        dd($user);
         $user->created_by = auth()->user()->id;
         $user->save();
         
@@ -95,29 +97,24 @@ class DashboardController extends Controller
         return redirect('profile')->with('success','Record Uploaded Successfully');
 }
 
-    public function change_password()
+    public function upload(Request $request)
     {
-        return view('auth.change-password');
-    }
-    public function store_change_password(Request $request)
-    {
-        $user = Auth::user();
-        $userPassword = $user->password;
+        // dd($request->all());
+        // dd($request->file('profile')->getClientoriginalName());
 
-        $validator =Validator::make($request->all(),[
-          'oldpassword' => 'required',
-          'newpassword' => 'required|same:password_confirmation|min:6',
-          'password_confirmation' => 'required',
-        ]);
+        $user = User::find(Auth::user()->id);
 
-        if(Hash::check($request->oldpassword, $userPassword)) 
-        {
-            return back()->with(['error'=>'Old password not match']);
-        }
-
-        $user->password = Hash::make($request->newpassword);
+        $file = $request->file('profile');
+            $fileName = $file->getClientOriginalName() . time() . "Hatch-social." . $file->getClientOriginalExtension();
+            $file->move('uploads/user/', $fileName);
+    
+       
+        $user->image = $fileName;
         $user->save();
+       
 
-        return redirect()->back()->with("success","Password changed successfully !");
+        return redirect()->back()->with('success', 'Image uploaded successfully.');
     }
+
+   
 }

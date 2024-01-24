@@ -44,37 +44,45 @@
                         <div class="col-xs-12 col-sm-12 col-md-12">
                             <div class="form-group">
                             <label>Name:</label>
-                                <input class="form-control" value="{{ $user->name }}" name="name" type="text" >
+                                <input class="form-control"  name="name" type="text">
                             </div>
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-12">
                             <div class="form-group">
                             <label>Email:</label>
-                                <input class="form-control"  value="{{ $user->email }}" name="email" type="text" >
+                                <input class="form-control"  name="email" type="text">
                             </div>
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-12">
                                 <div class="form-group">
                                     <label>Phone Number:</label>
-                                    <input class="form-control" value="{{ $user->phone }}" type="phonenumber" name="phone_number" >
+                                    <input class="form-control" type="phonenumber" name="phone_number">
                                 </div>
                             </div>
                         <div class="col-xs-12 col-sm-12 col-md-12">
                             <div class="form-group">
                             <label>Address:</label>
-                                <input class="form-control"  value="{{ $user->address }}" name="address" type="text" >
+                                <input class="form-control"  name="address" type="text">
                             </div>
                         </div>
                         
-                        <div class="col-xs-12 col-sm-12 col-md-12">
+                        
+                    <div class="col-xs-12 col-sm-12 col-md-12">
                             <div class="form-group">
-                            <label>Image:</label>
-                                <input  type="file" name="image" class="form-control" value="{{ $user->image }}">
-                            </div>
+                            <label>Image</label>
+                            <input type="file" name="profile" class="form-control">
+                    </div>
                         </div>
-                        
 
-                               <div class="col-xs-12 col-sm-12 col-md-12 text-center">
+                      <div class="row">
+                     
+                          <div class="col-sm-4">
+                              <img src="{{ asset('uploads/user/' . auth()->user()->image) }}" alt="">
+                          </div>
+                     
+              </div>
+
+                   <div class="col-xs-12 col-sm-12 col-md-12 text-center">
                             <button type="submit" class="btn btn-primary">Submit</button>
                         </div>
                     </div>
