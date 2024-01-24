@@ -127,96 +127,102 @@
             <div class="row">
               <div class="col-12">
                 <div class="card">
-              
-              <article>
-                <p style="text-align:center;background:#000;font-size:20px;color:#fff">Invoice</p> 
-                <address contenteditable>
-                  <p>Name:&nbsp;<strong>{{ auth()->check() ? auth()->user()->name : '' }}</strong></p>
-                  <p>Address:&nbsp;<strong>{{ auth()->check() ? auth()->user()->address : '' }}</strong></p>
-                  <p>Phone:&nbsp;<strong>{{ auth()->check() ? auth()->user()->phone : '' }}</strong></p>
-                  <p>Leads:&nbsp;<strong>{{ $invoice ? $invoice->leads->name : '' }}</strong></p>
-                </address>
-                 
-                  <div class="row">
-                  <div class="col-md-6" style="margin-top: 46px;">
-                      <div class="comment-section">
-                          <div class="comment-field" contenteditable>
-                              <input name="comment" class="form-control" style="display: none;"></input>
-                          </div>
+                <form method="post" action="{{ route('leads.mark.convert') }}">
+                @csrf
+                  <article>
+                      <p style="text-align:center;background:#000;font-size:20px;color:#fff">Invoice</p> 
+                    
+                      <address contenteditable>
+                        <p>Name:&nbsp;<strong>{{ auth()->check() ? auth()->user()->name : '' }}</strong></p>
+                        <p>Address:&nbsp;<strong>{{ auth()->check() ? auth()->user()->address : '' }}</strong></p>
+                        <p>Phone:&nbsp;<strong>{{ auth()->check() ? auth()->user()->phone : '' }}</strong></p>
+                        <p>Leads:&nbsp;<strong>{{ $invoice ? $invoice->leads->name : '' }}</strong></p>
+                      </address>
+                    
+                      <div class="row">
+                        <div class="col-md-6" style="margin-top: 46px;">
+                            <div class="comment-section">
+                                <div class="comment-field" contenteditable>
+                                    <input type="text" name="comment" class="form-control" style="display: none;"></input>
+                                    <input type="hidden" name="lead_id" class="form-control" value="{{ $invoice->lead_id }}"></input>
+                                  </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                          <table class="meta">
+                            <tr>
+                              <th><span contenteditable>Invoice #</span></th>
+                              <td><span contenteditable>{{ date('YmdHis') . '-' . rand(1000, 9999) }}</span></td>
+                            </tr>
+                            <tr>
+                              <th><span contenteditable>Date</span></th>
+                              <td><span contenteditable>{{ now()->format('F j, Y') }}</span></td>
+                            </tr>
+                            <tr>
+                              <th><span contenteditable>Amount Due</span></th>
+                              <td><span id="prefix" contenteditable>$</span><span id="amount-due">0.00</span></td>
+                            </tr>
+                          </table>
+                        </div>
                       </div>
-                  </div>
-                    <div class="col-md-6">
-                      <table class="meta">
+                      <table class="inventory" id="invoice-items">
+                        <thead>
+                          <tr>
+                            <th><span contenteditable>Item</span></th>
+                            <th><span contenteditable>Description</span></th>
+                            <th><span contenteditable>Rate</span></th>
+                            <th><span contenteditable>Quantity</span></th>
+                            <th><span contenteditable>Total Price</span></th>
+                            <th><span contenteditable></span></th>  
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr id="append-row">
+                            <td>
+                              <select name="product[]" class="form-control" >
+                                @foreach ($products as $pro)
+                                <option value="{{ $pro->id }}">{{ $pro->name }}</option>
+                                @endforeach
+                              </select>
+                            </td>
+                            <td><input name="description[]" class="form-control" ></input></td>
+                            <td><input name="amount[]" class="form-control"></input></td>
+                            <td><input name="qty[]" class="form-control"></input></td>
+                            <td><input name="total_amount[]" class="form-control" readonly></input></td>
+                            <td><a class="cut">-</a></td>
+                          </tr>
+                        </tbody>
+                      </table>
+
+                      <br/>
+                      <a class="add" id="add-item">+</a>
+                    
+                      <table class="balance">
                         <tr>
-                          <th><span contenteditable>Invoice #</span></th>
-                          <td><span contenteditable>{{ date('YmdHis') . '-' . rand(1000, 9999) }}</span></td>
+                          <th><span contenteditable>Total</span></th>
+                          <td><span id="overall-total">0.00</span></td>
                         </tr>
                         <tr>
-                          <th><span contenteditable>Date</span></th>
-                          <td><span contenteditable>{{ now()->format('F j, Y') }}</span></td>
+                          <th><span contenteditable>Amount Paid</span></th>
+                          <td><input name="amount_paid" id="amount_paid" class="form-control"></input></td>
                         </tr>
                         <tr>
-                          <th><span contenteditable>Amount Due</span></th>
-                          <td><span id="prefix" contenteditable>$</span><span id="amount-due">0.00</span></td>
+                          <th><span contenteditable>Balance Due</span></th>
+                          <td><span id="balance-due">0.00</span></td>
                         </tr>
                       </table>
+                  
+                  </article>
+                  
+                  <aside>
+                    <h1><span contenteditable>Additional Notes</span></h1>
+                    <div contenteditable>
+                      <p>A finance charge of 1.5% will be made on unpaid balances after 30 days.</p>
                     </div>
-                  </div>
-                
-                <table class="inventory" id="invoice-items">
-                      <thead>
-                        <tr>
-                          <th><span contenteditable>Item</span></th>
-                          <th><span contenteditable>Description</span></th>
-                          <th><span contenteditable>Rate</span></th>
-                          <th><span contenteditable>Quantity</span></th>
-                          <th><span contenteditable>Total Price</span></th>
-                          <th><span contenteditable></span></th>  
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <!-- Existing item row -->
-                        <tr id="append-row">
-                          <td>
-                            <select name="product" class="form-control" >
-                              @foreach ($products as $pro)
-                              <option value="{{ $pro->id }}">{{ $pro->name }}</option>
-                              @endforeach
-                            </select>
-                          </td>
-                          <td><input name="description[]" class="form-control" ></input></td>
-                          <td><input name="amount[]" class="form-control"></input></td>
-                          <td><input name="qty[]" class="form-control"></input></td>
-                          <td><input name="total_amount[]" class="form-control" readonly></input></td>
-                          <td><a class="cut">-</a></td>
-                        </tr>
-                      </tbody>
-                    </table>
-                    <br />
-                    <a class="add" id="add-item">+</a>
+                  </aside>
 
-                <table class="balance">
-                <tr>
-                  <th><span contenteditable>Total</span></th>
-                  <td><span id="overall-total">0.00</span></td>
-                </tr>
-                  <tr>
-                    <th><span contenteditable>Amount Paid</span></th>
-                    <td><input name="amount_paid" id="amount_paid" class="form-control"></input></td>
-                  </tr>
-                  <tr>
-                    <th><span contenteditable>Balance Due</span></th>
-                    <td><span id="balance-due">0.00</span></td>
-                  </tr>
-                </table>
-              
-              </article>
-              <aside>
-                <h1><span contenteditable>Additional Notes</span></h1>
-                <div contenteditable>
-                  <p>A finance charge of 1.5% will be made on unpaid balances after 30 days.</p>
-                </div>
-              </aside>
+                  <button type="submit" class="btn btn-primary">Mark Convert</button>
+                </form>  
                 </div>
               </div>
             </div>
@@ -227,7 +233,7 @@
 </div>
 
   <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-
+  
   <script>
     $(document).ready(function () {
       const invoiceItems = $('#invoice-items tbody');
@@ -267,7 +273,7 @@
       }
 
       $('#add-item').on('click', function () {
-        const newRow = `<tr><td><select name="product" class="form-control">@foreach ($products as $pro)<option value="{{ $pro->id }}">{{ $pro->name }}</option>@endforeach</select></td><td><input name="description[]" class="form-control"></td><td><input name="amount[]" class="form-control"></td><td><input name="qty[]" class="form-control"></td><td><input name="total_amount[]" class="form-control" readonly></td><td><a class="cut">-</a></td></tr>`;
+        const newRow = `<tr><td><select name="product[]" class="form-control">@foreach ($products as $pro)<option value="{{ $pro->id }}">{{ $pro->name }}</option>@endforeach</select></td><td><input name="description[]" class="form-control"></td><td><input name="amount[]" class="form-control"></td><td><input name="qty[]" class="form-control"></td><td><input name="total_amount[]" class="form-control" readonly></td><td><a class="cut">-</a></td></tr>`;
 
         invoiceItems.append(newRow);
         updateTotal();
