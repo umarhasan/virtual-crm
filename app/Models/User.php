@@ -55,6 +55,8 @@ class User extends Authenticatable implements MustVerifyEmail
     ];
 
 
+
+
     public function department()
     {
         return $this->hasOne(\App\Models\Department::class,'id','department_id');
