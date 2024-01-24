@@ -37,7 +37,6 @@ class DashboardController extends Controller
         // return Auth::user();
         
         $data['users'] = User::where('created_by', Auth::id())->count();
-        $data['users'] = User::with();
         $data['project'] = Project::count();
         $data['client'] = Client::count();
         $data['leads'] = Leads::count();
