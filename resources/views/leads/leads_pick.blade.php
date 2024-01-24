@@ -54,20 +54,24 @@
                                     <td>{{ $lead->users->name }}</td>
                                     <td>{{ $lead->leads->name }}</td>
                                     <td>{{ $lead->leads->phone }}</td>
-                                  @if(isset($lead) && $lead->status == 'pending')
-                                    <td>{!! $lead->comment !!}</td>
-                                    <td><span style="color:orange;font-weight:bold;font-size:17px">{{ $lead->status }}</span></td>
-                                  @elseif($lead->status == 'rejected')
-                                    <td>{!! $lead->comment !!}</td>
-                                    <td><span style="color:red;font-weight:bold;font-size:17px">{{ $lead->status }}</span></td>
-                                  @else
-                                    <td>{!! $lead->comment !!}</td>
-                                    <td><span style="color:#392C70;font-weight:bold;font-size:17px">{{ $lead->status }}</span></td>
-                                  @endif
+                                    @if(isset($lead) && $lead->status == 'pending')
+                                      <td>{!! $lead->comment !!}</td>
+                                      <td><span style="color:orange;font-weight:bold;font-size:17px">{{ $lead->status }}</span></td>
+                                    @elseif($lead->status == 'rejected')
+                                      <td>{!! $lead->comment !!}</td>
+                                      <td><span style="color:red;font-weight:bold;font-size:17px">{{ $lead->status }}</span></td>
+                                    @elseif($lead->status == 'accepted')
+                                      <td>{!! $lead->comment !!}</td>
+                                      <td><span style="color:green;font-weight:bold;font-size:17px">{{ $lead->status }}</span></td>
+                                    @else
+                                      <td>{!! $lead->comment !!}</td>
+                                      <td><span style="color:#392C70;font-weight:bold;font-size:17px">{{ $lead->status }}</span></td>
+                                    @endif
                                     <td>
-                                    <a href="{{ route('leads.invoice.show', $lead->lead_id) }}" class="btn btn-warning btn-sm btn-view">Invoice View</a>
-                                    <!-- <a class="btn btn-primary btn-sm" data-toggle="modal" data-target="#leadModal" data-lead-id="{{ $lead->leads->id }}" data-name="{{ $lead->leads->name }}" data-phone="{{ $lead->leads->phone }}">Leads Mark Convert</a></td> -->
-                                </tr>
+                                    @if(isset($lead) && $lead->status != 'accepted')
+                                      <a href="{{ route('leads.invoice.show', $lead->lead_id) }}" class="btn btn-warning btn-sm btn-view">Invoice View</a>
+                                    @endif  
+                                  </tr>
                               @endforeach
                       </tbody>
                     </table>

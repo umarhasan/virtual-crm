@@ -148,17 +148,30 @@ class LeadsController extends Controller
 
     public function LeadsPick(){
         $user_id = Auth::id();
-        $lead_pick = UserLead::with('users','leads')->where('user_id',$user_id)->whereIn('status',['pending','pick','rejected'])->get();
+        $lead_pick = UserLead::with('users','leads')->where('user_id',$user_id)->whereIn('status',['pending','pick','rejected','accepted'])->get();
         return view('leads.leads_pick',compact('lead_pick'));
         
     }
 
     public function LeadsMarkConvert(Request $request){
         
+        $total_amount = array_sum($request->input('amount'));
+        $total_qty = array_sum($request->input('qty'));
+        $description = json_encode($request->input('description'));
+        $product = json_encode($request->input('product'));
+        
         $userLead = UserLead::where('lead_id',$request->lead_id)->first();
-        $userLead->status = $request->status;
-        $userLead->comment = $request->lead_comment;
-        $userLead->amount = $request->lead_amount;
+       
+        $userLead->lead_id      =        $request->lead_id;
+        $userLead->user_id      =        Auth::id();
+        $userLead->amount       =        isset($total_amount) ? $total_amount : 0;
+        $userLead->qty          =        isset($total_qty) ? $total_qty : 0;
+        $userLead->description  =        $description;
+        $userLead->product      =        $product;
+        $userLead->comment      =        $request->comment;
+        $userLead->total_amount =        $total_amount * $total_qty;
+        $userLead->amount_paid  =        $request->amount_paid;
+        $userLead->status       =        'accepted';
         $userLead->save();
         
         return redirect()->back();
@@ -175,12 +188,11 @@ class LeadsController extends Controller
     }
 
     public function LeadsInvoiceShow($id)
-{
-    $invoice = UserLead::with('users', 'leads')->where('lead_id', $id)->first();
-    $user = Auth::user()->name;
-    $products = Product::get();
-
-   
-    return view('leads.invoice_show', compact('invoice', 'products'));
-}
+    {
+        $invoice = UserLead::with('users', 'leads')->where('lead_id', $id)->first();
+        $user = Auth::user()->name;
+        $products = Product::get();
+    
+        return view('leads.invoice_show', compact('invoice', 'products'));
+    }
 }
