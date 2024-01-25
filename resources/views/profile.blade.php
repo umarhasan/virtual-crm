@@ -9,12 +9,12 @@
           <div class="container-fluid">
             <div class="row mb-2">
               <div class="col-sm-6">
-                <h1>Edit profile</h1>
+                <h1>Profile Update</h1>
               </div>
               <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                   <li class="breadcrumb-item"><a href="#">Home</a></li>
-                  <li class="breadcrumb-item active">Edit profile</li>
+                  <li class="breadcrumb-item active">Profile Update</li>
                 </ol>
               </div>
             </div>
@@ -34,57 +34,50 @@
             @endif
           
         <div class="row"> 
+        <div class="col-12">
+              <div class="text-center">
+                <img src="{{ asset('uploads/user/' . auth()->user()->image) }}" alt="" class="rounded-circle" style="width: 100px; height: 100px;">
+              </div>
+            </div>
           <div class="col-12">
               <div class="card">
                   <div class="card-header">
-        
                   <form method="post" action="{{ route('user.update') }}" enctype="multipart/form-data">
                     @csrf
                     <div class="row">
-                        <div class="col-xs-12 col-sm-12 col-md-12">
-                            <div class="form-group">
-                            <label>Name:</label>
-                                <input class="form-control"  name="name" type="text">
-                            </div>
+                      <div class="col-xs-12 col-sm-12 col-md-6">
+                        <div class="form-group">
+                          <label>Name:</label>
+                          <input class="form-control" name="name" value="{{ auth()->user()->name }}" type="text">
                         </div>
-                        <div class="col-xs-12 col-sm-12 col-md-12">
-                            <div class="form-group">
-                            <label>Email:</label>
-                                <input class="form-control"  name="email" type="text">
-                            </div>
+                      </div>
+                      <div class="col-xs-12 col-sm-12 col-md-6">
+                        <div class="form-group">
+                          <label>Email:</label>
+                          <input class="form-control" name="email" value="{{ auth()->user()->email }}" type="text">
                         </div>
-                        <div class="col-xs-12 col-sm-12 col-md-12">
-                                <div class="form-group">
-                                    <label>Phone Number:</label>
-                                    <input class="form-control" type="phonenumber" name="phone_number">
-                                </div>
-                            </div>
-                        <div class="col-xs-12 col-sm-12 col-md-12">
-                            <div class="form-group">
-                            <label>Address:</label>
-                                <input class="form-control"  name="address" type="text">
-                            </div>
+                      </div>
+                      <div class="col-xs-12 col-sm-12 col-md-6">
+                        <div class="form-group">
+                          <label>Phone Number:</label>
+                          <input class="form-control" type="phonenumber" name="phone_number" value="{{ auth()->user()->phone }}" >
                         </div>
-                        
-                        
-                    <div class="col-xs-12 col-sm-12 col-md-12">
-                            <div class="form-group">
-                            <label>Image</label>
-                            <input type="file" name="profile" class="form-control">
+                      </div>
+                      <div class="col-xs-12 col-sm-12 col-md-6">
+                        <div class="form-group">
+                          <label>Address:</label>
+                          <input class="form-control" name="address" type="text" value="{{ auth()->user()->address }}">
+                        </div>
+                      </div>
+                      <div class="col-xs-12 col-sm-12 col-md-12">
+                        <div class="form-group">
+                          <label>Image:</label>
+                          <input type="file" name="profile" class="form-control">
+                        </div>
+                      </div>
                     </div>
-                        </div>
-
-                      <div class="row">
-                     
-                          <div class="col-sm-4">
-                              <img src="{{ asset('uploads/user/' . auth()->user()->image) }}" alt="">
-                          </div>
-                     
-              </div>
-
-                   <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-                            <button type="submit" class="btn btn-primary">Submit</button>
-                        </div>
+                    <div class="col-xs-12 col-sm-12 col-md-12 text-center mt-3">
+                      <button type="submit" class="btn btn-primary">Submit</button>
                     </div>
                   </form>
                   </div>
@@ -97,9 +90,3 @@
     </div>
 </div>
 @endsection
-
-
-
-
-
-    

@@ -219,7 +219,6 @@
               </a>
               <a href="{{ url('/profile')}}" class="dropdown-item">
               <i class="fa-solid fa-user text-primary"></i>
-                
                 Profile
               </a>
               <div class="dropdown-divider"></div>

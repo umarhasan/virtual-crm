@@ -70,12 +70,14 @@ class DashboardController extends Controller
     }
 
     public function edit($id)
-        {
-            $data['user'] = User::find($id);
-            $profile = $user->profile; // assuming there is a one-to-one relationship between User and Profile
+    {
+        $data['user'] = User::find($id);
+        $profile = $user->profile; // assuming there is a one-to-one relationship between User and Profile
 
-            return view('profile', $data);
-        }
+        return view('profile', $data);
+    }
+
+   
 
     public function profileupdate(Request $request){
 
@@ -86,34 +88,23 @@ class DashboardController extends Controller
         $user->email = $request->email;
         $user->phone = $request->phone_number;
         $user->address = $request->address;
-        $user->image = $request->image;
         $user->created_by = auth()->user()->id;
+
+        // Check if an image is present in the request
+        if ($request->hasFile('profile')) {
+            $file = $request->file('profile');
+            $fileName = $file->getClientOriginalName() . time() . "Hatch-social." . $file->getClientOriginalExtension();
+            $file->move('uploads/user/', $fileName);
+            $user->image = $fileName;
+        }
+
         $user->save();
-        
-       
 
         session::flash('success','Record Updated Successfully');
         return redirect('profile')->with('success','Record Uploaded Successfully');
-}
-
-    public function upload(Request $request)
-    {
-        // dd($request->all());
-        // dd($request->file('profile')->getClientoriginalName());
-
-        $user = User::find(Auth::user()->id);
-
-        $file = $request->file('profile');
-            $fileName = $file->getClientOriginalName() . time() . "Hatch-social." . $file->getClientOriginalExtension();
-            $file->move('uploads/user/', $fileName);
-    
-       
-        $user->image = $fileName;
-        $user->save();
-       
-
-        return redirect()->back()->with('success', 'Image uploaded successfully.');
     }
+
+  
 
    
 }
