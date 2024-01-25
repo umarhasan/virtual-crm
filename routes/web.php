@@ -93,8 +93,7 @@ Route::group(['middleware' => ['auth','verified']], function(){
     Route::resource('category', CategoryController::class);
     Route::resource('subcategory', SubCategoryController::class);
     Route::get('/profile', [DashboardController::class, 'profile'])->name('profile.index');
-    Route::post('/profile', [DashboardController::class, 'profileupdate'])->name('user.update');
-    Route::post('/profile',  [DashboardController::class, 'upload'])->name('user.update');
+    Route::post('/profile/image', [DashboardController::class, 'profileupdate'])->name('user.update');
     Route::resource('product', ProductController::class);
     Route::get('subcatories/{category}', [SubCategoryController::class,'subcatories']);
     Route::get('product/{id}/images', [ProductController::class, 'images']);
