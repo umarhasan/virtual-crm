@@ -131,7 +131,7 @@
                 @csrf
                   <article>
                       <p style="text-align:center;background:#000;font-size:20px;color:#fff">Invoice</p> 
-                    
+                      <input type="hidden" name="invoice_id" value="{{ date('YmdHis') . '-' . rand(1000, 9999) }}">
                       <address contenteditable>
                         <p>Name:&nbsp;<strong>{{ auth()->check() ? auth()->user()->name : '' }}</strong></p>
                         <p>Address:&nbsp;<strong>{{ auth()->check() ? auth()->user()->address : '' }}</strong></p>
