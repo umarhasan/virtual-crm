@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('invoice_details', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('invoice_id');
+            $table->string('invoice_id')->nullable();
             $table->string('product');
             $table->text('description')->nullable();
             $table->decimal('amount', 8, 2);
