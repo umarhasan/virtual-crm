@@ -54,13 +54,13 @@
                       <div class="col-xs-12 col-sm-12 col-md-6">
                         <div class="form-group">
                           <label>Email:</label>
-                          <input class="form-control" name="email" value="{{ auth()->user()->email }}" type="text">
+                          <input class="form-control" name="email" value="{{ auth()->user()->email }}" type="text" readonly>
                         </div>
                       </div>
                       <div class="col-xs-12 col-sm-12 col-md-6">
                         <div class="form-group">
                           <label>Phone Number:</label>
-                          <input class="form-control" type="phonenumber" name="phone_number" value="{{ auth()->user()->phone }}" >
+                          <input class="form-control" type="phonenumber" name="phone_number" value="{{ auth()->user()->phone }}">
                         </div>
                       </div>
                       <div class="col-xs-12 col-sm-12 col-md-6">
